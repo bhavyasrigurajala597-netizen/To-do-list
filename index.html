@@ -133,9 +133,6 @@
       --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
     }
 
-    /* ==========================================================================
-       RESET & BASE STYLES
-       ========================================================================== */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -166,6 +163,19 @@
       background: none;
       outline: none;
       transition: var(--transition);
+      user-select: none;
+    }
+
+    /* Prevent child SVGs/spans from obstructing button click event targets */
+    button svg, 
+    button span, 
+    .filter-btn svg, 
+    .filter-btn span, 
+    .task-action-btn svg, 
+    .btn-add svg, 
+    .btn-footer svg, 
+    .custom-checkbox svg {
+      pointer-events: none;
     }
 
     button:focus-visible, input:focus-visible, select:focus-visible {
@@ -173,7 +183,10 @@
       outline-offset: 2px;
     }
 
-    /* Container */
+    button:active {
+      transform: scale(0.97);
+    }
+
     .app-container {
       width: 100%;
       max-width: 980px;
@@ -185,9 +198,7 @@
       gap: 24px;
     }
 
-    /* ==========================================================================
-       HEADER SECTION
-       ========================================================================== */
+    /* HEADER */
     .app-header {
       display: flex;
       justify-content: space-between;
@@ -266,9 +277,7 @@
       height: 18px;
     }
 
-    /* ==========================================================================
-       STATISTICS DASHBOARD
-       ========================================================================== */
+    /* STATS DASHBOARD */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -323,7 +332,6 @@
     .stat-card.stat-overdue .stat-value { color: var(--danger); }
     .stat-card.stat-high .stat-value { color: var(--priority-high-text); }
 
-    /* Progress Banner */
     .progress-banner {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -366,9 +374,7 @@
       transition: width 0.4s ease;
     }
 
-    /* ==========================================================================
-       ADD TASK FORM
-       ========================================================================== */
+    /* ADD TASK FORM */
     .add-task-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -485,9 +491,7 @@
       height: 18px;
     }
 
-    /* ==========================================================================
-       SEARCH, FILTER & SORT SECTION
-       ========================================================================== */
+    /* CONTROLS */
     .controls-panel {
       display: flex;
       flex-direction: column;
@@ -579,7 +583,6 @@
       cursor: pointer;
     }
 
-    /* Filter Tabs */
     .filter-tabs {
       display: flex;
       flex-wrap: wrap;
@@ -634,9 +637,7 @@
       color: #ffffff;
     }
 
-    /* ==========================================================================
-       TASK LIST & CARDS
-       ========================================================================== */
+    /* TASK LIST */
     .task-list-section {
       display: flex;
       flex-direction: column;
@@ -689,6 +690,7 @@
       cursor: pointer;
       transition: var(--transition);
       background: var(--bg-surface);
+      flex-shrink: 0;
     }
 
     .custom-checkbox:hover {
@@ -717,7 +719,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      min-width: 0; /* Prevents overflow */
+      min-width: 0;
     }
 
     .task-title {
@@ -737,7 +739,6 @@
       font-size: 0.775rem;
     }
 
-    /* Badges */
     .priority-badge {
       display: inline-flex;
       align-items: center;
@@ -828,7 +829,7 @@
     }
 
     .task-action-btn {
-      padding: 7px;
+      padding: 8px;
       border-radius: var(--radius-sm);
       color: var(--text-muted);
       transition: var(--transition);
@@ -852,7 +853,7 @@
       height: 16px;
     }
 
-    /* Task Inline Edit Box */
+    /* INLINE EDIT */
     .task-edit-panel {
       display: flex;
       flex-direction: column;
@@ -915,7 +916,7 @@
       background: var(--bg-surface-tertiary);
     }
 
-    /* Empty State */
+    /* EMPTY STATE */
     .empty-state {
       display: flex;
       flex-direction: column;
@@ -972,9 +973,7 @@
       background: var(--bg-surface-tertiary);
     }
 
-    /* ==========================================================================
-       FOOTER & BATCH ACTIONS
-       ========================================================================== */
+    /* FOOTER */
     .app-footer {
       display: flex;
       flex-wrap: wrap;
@@ -1004,10 +1003,10 @@
     }
 
     .btn-footer {
-      padding: 7px 12px;
+      padding: 8px 14px;
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-sm);
-      font-size: 0.8rem;
+      font-size: 0.825rem;
       font-weight: 500;
       color: var(--text-muted);
       background: var(--bg-surface-secondary);
@@ -1033,9 +1032,7 @@
       height: 14px;
     }
 
-    /* ==========================================================================
-       TOAST NOTIFICATIONS
-       ========================================================================== */
+    /* TOASTS */
     .toast-container {
       position: fixed;
       bottom: 24px;
@@ -1096,9 +1093,7 @@
       flex: 1;
     }
 
-    /* ==========================================================================
-       CONFIRMATION MODAL
-       ========================================================================== */
+    /* MODAL */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -1213,15 +1208,10 @@
       background: var(--danger-hover);
     }
 
-    /* ==========================================================================
-       RESPONSIVE BREAKPOINTS
-       ========================================================================== */
+    /* RESPONSIVE */
     @media (max-width: 820px) {
       .stats-grid {
         grid-template-columns: repeat(3, 1fr);
-      }
-      .stat-card:nth-child(4), .stat-card:nth-child(5) {
-        grid-column: span 1;
       }
     }
 
@@ -1328,9 +1318,7 @@
 <body>
 
   <div class="app-container">
-    <!-- ====================================================================
-         HEADER
-         ==================================================================== -->
+    <!-- HEADER -->
     <header class="app-header">
       <div class="brand-block">
         <div class="brand-icon" aria-hidden="true">
@@ -1366,9 +1354,7 @@
       </div>
     </header>
 
-    <!-- ====================================================================
-         STATISTICS DASHBOARD
-         ==================================================================== -->
+    <!-- STATISTICS DASHBOARD -->
     <section class="stats-section" aria-label="Task statistics">
       <div class="stats-grid">
         <div class="stat-card stat-total">
@@ -1429,7 +1415,6 @@
         </div>
       </div>
 
-      <!-- Progress Track -->
       <div class="progress-banner" style="margin-top: 14px;">
         <div class="progress-banner-header">
           <span>Overall Progress: <strong id="progressPercentText">0%</strong></span>
@@ -1441,11 +1426,9 @@
       </div>
     </section>
 
-    <!-- ====================================================================
-         ADD TASK FORM
-         ==================================================================== -->
+    <!-- ADD TASK FORM -->
     <section class="add-task-card" aria-label="Add new task">
-      <form id="addTaskForm" class="add-task-form" onsubmit="event.preventDefault(); addTask();">
+      <form id="addTaskForm" class="add-task-form">
         <div class="form-main-row">
           <div class="input-wrapper">
             <input 
@@ -1454,7 +1437,6 @@
               class="task-input" 
               placeholder="What needs to be accomplished today? Press Enter to add..." 
               autocomplete="off"
-              required
             />
           </div>
         </div>
@@ -1487,9 +1469,7 @@
       </form>
     </section>
 
-    <!-- ====================================================================
-         SEARCH, FILTER & SORT CONTROLS
-         ==================================================================== -->
+    <!-- SEARCH & FILTERS -->
     <section class="controls-panel" aria-label="Filter and search tasks">
       <div class="search-sort-bar">
         <div class="search-box">
@@ -1502,9 +1482,8 @@
             id="searchInput" 
             class="search-input" 
             placeholder="Search tasks by name..." 
-            oninput="searchTasks(this.value)"
           />
-          <button type="button" id="searchClearBtn" class="search-clear-btn" aria-label="Clear search" onclick="clearSearch()">
+          <button type="button" id="searchClearBtn" class="search-clear-btn" aria-label="Clear search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -1514,7 +1493,7 @@
 
         <div class="sort-control">
           <label for="sortSelect">Sort:</label>
-          <select id="sortSelect" class="sort-select" onchange="sortTasks(this.value)">
+          <select id="sortSelect" class="sort-select">
             <option value="newest" selected>Newest First</option>
             <option value="oldest">Oldest First</option>
             <option value="priority">Priority (High &rarr; Low)</option>
@@ -1524,49 +1503,42 @@
         </div>
       </div>
 
-      <!-- Filter Buttons -->
       <div class="filter-tabs" id="filterTabs">
-        <button type="button" class="filter-btn active" data-filter="all" onclick="filterTasks('all')">
+        <button type="button" class="filter-btn active" data-filter="all">
           All <span class="filter-count" id="countAll">0</span>
         </button>
-        <button type="button" class="filter-btn" data-filter="pending" onclick="filterTasks('pending')">
+        <button type="button" class="filter-btn" data-filter="pending">
           Pending <span class="filter-count" id="countPending">0</span>
         </button>
-        <button type="button" class="filter-btn" data-filter="completed" onclick="filterTasks('completed')">
+        <button type="button" class="filter-btn" data-filter="completed">
           Completed <span class="filter-count" id="countCompleted">0</span>
         </button>
-        <button type="button" class="filter-btn" data-filter="high" onclick="filterTasks('high')">
+        <button type="button" class="filter-btn" data-filter="high">
           🔴 High <span class="filter-count" id="countHigh">0</span>
         </button>
-        <button type="button" class="filter-btn" data-filter="medium" onclick="filterTasks('medium')">
+        <button type="button" class="filter-btn" data-filter="medium">
           🟡 Medium <span class="filter-count" id="countMedium">0</span>
         </button>
-        <button type="button" class="filter-btn" data-filter="low" onclick="filterTasks('low')">
+        <button type="button" class="filter-btn" data-filter="low">
           🟢 Low <span class="filter-count" id="countLow">0</span>
         </button>
-        <button type="button" class="filter-btn" data-filter="overdue" onclick="filterTasks('overdue')">
+        <button type="button" class="filter-btn" data-filter="overdue">
           ⚠️ Overdue <span class="filter-count" id="countOverdue">0</span>
         </button>
       </div>
     </section>
 
-    <!-- ====================================================================
-         TASK LIST
-         ==================================================================== -->
-    <main class="task-list-section" id="taskList" aria-live="polite">
-      <!-- Tasks dynamically rendered here -->
-    </main>
+    <!-- TASK LIST -->
+    <main class="task-list-section" id="taskList" aria-live="polite"></main>
 
-    <!-- ====================================================================
-         FOOTER & ACTIONS
-         ==================================================================== -->
+    <!-- FOOTER -->
     <footer class="app-footer">
       <div class="footer-left" id="footerSummary">
         0 of 0 tasks completed
       </div>
 
       <div class="footer-actions">
-        <button type="button" class="btn-footer" onclick="loadSampleTasks(true)">
+        <button type="button" class="btn-footer" id="btnResetDemo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="1 4 1 10 7 10"></polyline>
             <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
@@ -1574,14 +1546,14 @@
           Reset Demo Data
         </button>
 
-        <button type="button" class="btn-footer btn-danger-action" onclick="confirmClearCompleted()">
+        <button type="button" class="btn-footer btn-danger-action" id="btnClearCompleted">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
           Clear Completed
         </button>
 
-        <button type="button" class="btn-footer btn-danger-action" onclick="confirmDeleteAll()">
+        <button type="button" class="btn-footer btn-danger-action" id="btnDeleteAll">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="3 6 5 6 21 6"></polyline>
             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -1592,9 +1564,7 @@
     </footer>
   </div>
 
-  <!-- ======================================================================
-       CONFIRMATION MODAL
-       ====================================================================== -->
+  <!-- CONFIRMATION MODAL -->
   <div class="modal-overlay" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-box">
       <div class="modal-header">
@@ -1611,35 +1581,53 @@
         Are you sure you want to proceed?
       </div>
       <div class="modal-actions">
-        <button type="button" class="modal-btn-cancel" onclick="closeConfirmModal()">Cancel</button>
-        <button type="button" class="modal-btn-confirm" id="modalConfirmBtn">Confirm Delete</button>
+        <button type="button" class="modal-btn-cancel" id="modalCancelBtn">Cancel</button>
+        <button type="button" class="modal-btn-confirm" id="modalConfirmBtn">Confirm</button>
       </div>
     </div>
   </div>
 
-  <!-- ======================================================================
-       TOAST CONTAINER
-       ====================================================================== -->
+  <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
 
-  <!-- ======================================================================
-       JAVASCRIPT LOGIC
-       ====================================================================== -->
+  <!-- JAVASCRIPT LOGIC -->
   <script>
     /**
      * ========================================================================
-     * MY TO-DO LIST APPLICATION
-     * Features: Add, Edit, Delete, Toggle Complete, Priority System, Due Dates,
-     * Search, Filter, Sort, Statistics Dashboard, LocalStorage, Dark/Light Mode,
-     * Custom Toasts, and Confirmation Modals.
+     * TASK MANAGEMENT LOGIC WITH SAFE STORAGE & EVENT DELEGATION
+     * All buttons are dual-bound via direct addEventListener and delegated listeners.
      * ========================================================================
      */
 
-    // Storage Keys
     const STORAGE_KEY = 'todo_app_tasks_v2';
     const THEME_KEY = 'todo_app_theme';
 
-    // Application State
+    // In-memory fallback if localStorage is blocked by iframe security sandbox
+    const memoryStore = {};
+
+    function safeGetStorage(key) {
+      try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          return window.localStorage.getItem(key);
+        }
+      } catch (e) {
+        console.warn('LocalStorage unavailable, using fallback', e);
+      }
+      return memoryStore[key] || null;
+    }
+
+    function safeSetStorage(key, value) {
+      try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          window.localStorage.setItem(key, value);
+          return;
+        }
+      } catch (e) {
+        console.warn('LocalStorage unavailable, using fallback', e);
+      }
+      memoryStore[key] = String(value);
+    }
+
     let tasks = [];
     let currentFilter = 'all';
     let searchQuery = '';
@@ -1648,26 +1636,7 @@
     let pendingModalAction = null;
 
     /**
-     * Initialize the application on DOM ready
-     */
-    document.addEventListener('DOMContentLoaded', () => {
-      initCurrentDate();
-      initTheme();
-      loadTasks();
-
-      // Keyboard shortcut: Escape closes modal or cancel edit
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          closeConfirmModal();
-          if (editingTaskId) {
-            cancelEdit();
-          }
-        }
-      });
-    });
-
-    /**
-     * Set header date display with formatted human-readable date
+     * Core Application Functions
      */
     function initCurrentDate() {
       const dateEl = document.getElementById('currentDateDisplay');
@@ -1676,7 +1645,6 @@
       const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
       dateEl.textContent = now.toLocaleDateString('en-US', options);
 
-      // Set default minimum date for date picker to today
       const todayString = now.toISOString().split('T')[0];
       const dueDateInput = document.getElementById('dueDateInput');
       if (dueDateInput) {
@@ -1684,12 +1652,9 @@
       }
     }
 
-    /**
-     * Load tasks from localStorage or initialize with sample tasks
-     */
     function loadTasks() {
       try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+        const stored = safeGetStorage(STORAGE_KEY);
         if (stored) {
           tasks = JSON.parse(stored);
         } else {
@@ -1697,29 +1662,22 @@
           return;
         }
       } catch (err) {
-        console.error('Failed to parse tasks from localStorage', err);
+        console.error('Failed to parse tasks', err);
         tasks = [];
       }
       renderTasks();
       updateStatistics();
     }
 
-    /**
-     * Save tasks array to localStorage
-     */
     function saveTasks() {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+        safeSetStorage(STORAGE_KEY, JSON.stringify(tasks));
       } catch (err) {
-        console.error('Failed to save tasks to localStorage', err);
-        showToast('Error saving data to local storage', 'danger');
+        console.error('Failed to save tasks', err);
       }
       updateStatistics();
     }
 
-    /**
-     * Load default sample tasks (for demo / first load)
-     */
     function loadSampleTasks(notifyUser = true) {
       const today = new Date();
       const yesterday = new Date(today);
@@ -1744,7 +1702,7 @@
           id: 'task_' + Date.now() + '_2',
           name: 'Submit Database Systems lab report',
           priority: 'high',
-          dueDate: formatDate(yesterday), // Overdue task demonstration
+          dueDate: formatDate(yesterday),
           completed: false,
           createdAt: Date.now() - 3600000 * 28
         },
@@ -1781,9 +1739,6 @@
       }
     }
 
-    /**
-     * Add a new task
-     */
     function addTask() {
       const input = document.getElementById('taskInput');
       const prioritySelect = document.getElementById('prioritySelect');
@@ -1793,7 +1748,6 @@
       const priority = prioritySelect ? prioritySelect.value : 'medium';
       const dueDate = dueDateInput ? dueDateInput.value : '';
 
-      // Validation
       if (!name) {
         showToast('Please enter a task name!', 'danger');
         if (input) input.focus();
@@ -1813,18 +1767,14 @@
       saveTasks();
       renderTasks();
 
-      // Clear input fields
-      input.value = '';
-      dueDateInput.value = '';
-      prioritySelect.value = 'medium';
-      input.focus();
+      if (input) input.value = '';
+      if (dueDateInput) dueDateInput.value = '';
+      if (prioritySelect) prioritySelect.value = 'medium';
+      if (input) input.focus();
 
       showToast(`Task "${escapeHtml(name)}" added successfully!`, 'success');
     }
 
-    /**
-     * Toggle completion state of a task
-     */
     function completeTask(id) {
       const taskIndex = tasks.findIndex(t => t.id === id);
       if (taskIndex === -1) return;
@@ -1840,9 +1790,6 @@
       }
     }
 
-    /**
-     * Delete a single task with confirmation
-     */
     function deleteTask(id) {
       const task = tasks.find(t => t.id === id);
       if (!task) return;
@@ -1859,9 +1806,6 @@
       );
     }
 
-    /**
-     * Enter edit mode for a task
-     */
     function editTask(id) {
       editingTaskId = id;
       renderTasks();
@@ -1872,9 +1816,6 @@
       }
     }
 
-    /**
-     * Save an edited task
-     */
     function saveEdit(id) {
       const editInput = document.getElementById(`edit-input-${id}`);
       const editPriority = document.getElementById(`edit-priority-${id}`);
@@ -1902,21 +1843,13 @@
       }
     }
 
-    /**
-     * Cancel edit mode
-     */
     function cancelEdit() {
       editingTaskId = null;
       renderTasks();
     }
 
-    /**
-     * Set active filter
-     */
     function filterTasks(filterName) {
       currentFilter = filterName;
-
-      // Update active filter button state
       const buttons = document.querySelectorAll('#filterTabs .filter-btn');
       buttons.forEach(btn => {
         if (btn.dataset.filter === filterName) {
@@ -1925,15 +1858,11 @@
           btn.classList.remove('active');
         }
       });
-
       renderTasks();
     }
 
-    /**
-     * Search tasks by query
-     */
     function searchTasks(query) {
-      searchQuery = query.trim().toLowerCase();
+      searchQuery = (query || '').trim().toLowerCase();
       const clearBtn = document.getElementById('searchClearBtn');
       if (clearBtn) {
         clearBtn.style.display = searchQuery ? 'flex' : 'none';
@@ -1941,9 +1870,6 @@
       renderTasks();
     }
 
-    /**
-     * Clear search input
-     */
     function clearSearch() {
       const searchInput = document.getElementById('searchInput');
       if (searchInput) {
@@ -1953,17 +1879,11 @@
       if (searchInput) searchInput.focus();
     }
 
-    /**
-     * Sort tasks by criteria
-     */
     function sortTasks(sortType) {
       currentSort = sortType;
       renderTasks();
     }
 
-    /**
-     * Clear all completed tasks with confirmation
-     */
     function confirmClearCompleted() {
       const completedCount = tasks.filter(t => t.completed).length;
       if (completedCount === 0) {
@@ -1987,9 +1907,6 @@
       showToast('All completed tasks cleared!', 'info');
     }
 
-    /**
-     * Delete all tasks with confirmation
-     */
     function confirmDeleteAll() {
       if (tasks.length === 0) {
         showToast('Your task list is already empty.', 'info');
@@ -2012,9 +1929,6 @@
       showToast('All tasks have been deleted.', 'danger');
     }
 
-    /**
-     * Update Statistics Dashboard & Count Badges
-     */
     function updateStatistics() {
       const todayStr = new Date().toISOString().split('T')[0];
 
@@ -2027,10 +1941,7 @@
       }).length;
 
       const high = tasks.filter(t => t.priority === 'high' && !t.completed).length;
-      const medium = tasks.filter(t => t.priority === 'medium' && !t.completed).length;
-      const low = tasks.filter(t => t.priority === 'low' && !t.completed).length;
 
-      // Update counters in Dashboard
       const elTotal = document.getElementById('statTotalCount');
       const elComp = document.getElementById('statCompletedCount');
       const elPend = document.getElementById('statPendingCount');
@@ -2043,7 +1954,6 @@
       if (elOverdue) elOverdue.textContent = overdue;
       if (elHigh) elHigh.textContent = high;
 
-      // Update Filter button counts
       const cAll = document.getElementById('countAll');
       const cPending = document.getElementById('countPending');
       const cCompleted = document.getElementById('countCompleted');
@@ -2060,7 +1970,6 @@
       if (cLow) cLow.textContent = tasks.filter(t => t.priority === 'low').length;
       if (cOver) cOver.textContent = overdue;
 
-      // Progress calculation
       const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
       const progressBar = document.getElementById('progressBarFill');
       const progressText = document.getElementById('progressPercentText');
@@ -2085,30 +1994,23 @@
         }
       }
 
-      // Footer summary
       const footerSummary = document.getElementById('footerSummary');
       if (footerSummary) {
         footerSummary.textContent = `${completed} of ${total} tasks completed (${percentage}%)`;
       }
     }
 
-    /**
-     * Render the filtered and sorted task list
-     */
     function renderTasks() {
       const container = document.getElementById('taskList');
       if (!container) return;
 
       const todayStr = new Date().toISOString().split('T')[0];
 
-      // 1. Filter
       let filtered = tasks.filter(task => {
-        // Search query
         if (searchQuery && !task.name.toLowerCase().includes(searchQuery)) {
           return false;
         }
 
-        // Active tab filter
         switch (currentFilter) {
           case 'pending':
             return !task.completed;
@@ -2128,14 +2030,9 @@
         }
       });
 
-      // 2. Sort
       filtered.sort((a, b) => {
-        if (currentSort === 'newest') {
-          return b.createdAt - a.createdAt;
-        }
-        if (currentSort === 'oldest') {
-          return a.createdAt - b.createdAt;
-        }
+        if (currentSort === 'newest') return b.createdAt - a.createdAt;
+        if (currentSort === 'oldest') return a.createdAt - b.createdAt;
         if (currentSort === 'priority') {
           const weight = { high: 3, medium: 2, low: 1 };
           return weight[b.priority] - weight[a.priority];
@@ -2151,7 +2048,6 @@
         return 0;
       });
 
-      // 3. Render HTML
       if (filtered.length === 0) {
         container.innerHTML = getEmptyStateHtml();
         return;
@@ -2165,15 +2061,11 @@
       }).join('');
     }
 
-    /**
-     * Generate HTML for a standard task card
-     */
     function getTaskCardHtml(task, todayStr) {
       const isCompleted = task.completed;
       const isOverdue = !isCompleted && task.dueDate && task.dueDate < todayStr;
       const isDueToday = !isCompleted && task.dueDate && task.dueDate === todayStr;
 
-      // Priority badge details
       let priorityClass = 'badge-medium';
       let priorityText = 'Medium';
       if (task.priority === 'high') {
@@ -2184,7 +2076,6 @@
         priorityText = 'Low';
       }
 
-      // Due date badge formatting
       let dueBadgeHtml = '';
       if (task.dueDate) {
         const dueDateObj = new Date(task.dueDate + 'T00:00:00');
@@ -2214,21 +2105,20 @@
         }
       }
 
-      // Creation timestamp
       const createdObj = new Date(task.createdAt);
       const formattedCreated = createdObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
                                createdObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
       return `
-        <article class="task-card ${isCompleted ? 'is-completed' : ''}" id="${task.id}">
+        <article class="task-card ${isCompleted ? 'is-completed' : ''}" data-task-id="${task.id}" id="${task.id}">
           <div class="task-checkbox-wrapper">
             <button 
               type="button" 
-              class="custom-checkbox" 
+              class="custom-checkbox btn-toggle-complete" 
+              data-id="${task.id}"
               role="checkbox" 
               aria-checked="${isCompleted}" 
               aria-label="Mark task as ${isCompleted ? 'pending' : 'completed'}"
-              onclick="completeTask('${task.id}')"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <polyline points="20 6 9 17 4 12"></polyline>
@@ -2257,10 +2147,10 @@
           <div class="task-actions">
             <button 
               type="button" 
-              class="task-action-btn" 
+              class="task-action-btn btn-edit-trigger" 
+              data-id="${task.id}"
               title="Edit task" 
               aria-label="Edit task"
-              onclick="editTask('${task.id}')"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -2270,10 +2160,10 @@
 
             <button 
               type="button" 
-              class="task-action-btn btn-delete" 
+              class="task-action-btn btn-delete btn-delete-trigger" 
+              data-id="${task.id}"
               title="Delete task" 
               aria-label="Delete task"
-              onclick="deleteTask('${task.id}')"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="3 6 5 6 21 6"></polyline>
@@ -2287,19 +2177,15 @@
       `;
     }
 
-    /**
-     * Generate HTML for task inline edit panel
-     */
     function getEditCardHtml(task) {
       return `
-        <article class="task-card" id="${task.id}" style="border-color: var(--primary);">
+        <article class="task-card" data-task-id="${task.id}" id="${task.id}" style="border-color: var(--primary);">
           <div class="task-edit-panel">
             <input 
               type="text" 
               id="edit-input-${task.id}" 
               class="task-edit-input" 
               value="${escapeHtml(task.name)}" 
-              onkeydown="if(event.key==='Enter') saveEdit('${task.id}'); if(event.key==='Escape') cancelEdit();"
             />
             
             <div class="task-edit-controls">
@@ -2319,8 +2205,8 @@
               </div>
 
               <div class="task-edit-buttons">
-                <button type="button" class="btn-edit-save" onclick="saveEdit('${task.id}')">Save Changes</button>
-                <button type="button" class="btn-edit-cancel" onclick="cancelEdit()">Cancel</button>
+                <button type="button" class="btn-edit-save" data-id="${task.id}">Save Changes</button>
+                <button type="button" class="btn-edit-cancel">Cancel</button>
               </div>
             </div>
           </div>
@@ -2328,18 +2214,15 @@
       `;
     }
 
-    /**
-     * Generate empty state HTML when no tasks match current filter/search
-     */
     function getEmptyStateHtml() {
       let title = "No tasks found";
       let desc = "You don't have any tasks matching your current view.";
-      let actionBtn = `<button class="btn-empty-action" onclick="filterTasks('all'); clearSearch();">View All Tasks</button>`;
+      let actionBtn = `<button type="button" class="btn-empty-action btn-view-all">View All Tasks</button>`;
 
       if (tasks.length === 0) {
         title = "No tasks yet!";
         desc = "Organize your day, track priorities, and stay productive. Add your first task above!";
-        actionBtn = `<button class="btn-empty-action" onclick="loadSampleTasks(true)">Load Demo Tasks</button>`;
+        actionBtn = `<button type="button" class="btn-empty-action btn-load-demo">Load Demo Tasks</button>`;
       } else if (currentFilter === 'completed') {
         title = "No completed tasks yet";
         desc = "Check off tasks as you finish them to track your accomplishments!";
@@ -2349,7 +2232,7 @@
       } else if (searchQuery) {
         title = `No results for "${escapeHtml(searchQuery)}"`;
         desc = "Try searching for a different keyword or check your spelling.";
-        actionBtn = `<button class="btn-empty-action" onclick="clearSearch()">Clear Search</button>`;
+        actionBtn = `<button type="button" class="btn-empty-action btn-clear-search">Clear Search</button>`;
       }
 
       return `
@@ -2367,11 +2250,6 @@
       `;
     }
 
-    /**
-     * ========================================================================
-     * CONFIRMATION MODAL LOGIC
-     * ========================================================================
-     */
     function openConfirmModal(title, message, onConfirm) {
       const modal = document.getElementById('confirmModal');
       const titleEl = document.getElementById('modalTitle');
@@ -2385,13 +2263,6 @@
 
       pendingModalAction = onConfirm;
 
-      confirmBtn.onclick = () => {
-        if (typeof pendingModalAction === 'function') {
-          pendingModalAction();
-        }
-        closeConfirmModal();
-      };
-
       modal.classList.add('active');
     }
 
@@ -2403,29 +2274,19 @@
       pendingModalAction = null;
     }
 
-    /**
-     * ========================================================================
-     * THEME TOGGLE (DARK / LIGHT MODE)
-     * ========================================================================
-     */
     function initTheme() {
-      const savedTheme = localStorage.getItem(THEME_KEY);
+      const savedTheme = safeGetStorage(THEME_KEY);
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       
       const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
       applyTheme(theme);
-
-      const toggleBtn = document.getElementById('themeToggleBtn');
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', toggleTheme);
-      }
     }
 
     function toggleTheme() {
       const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       applyTheme(newTheme);
-      localStorage.setItem(THEME_KEY, newTheme);
+      safeSetStorage(THEME_KEY, newTheme);
       showToast(`Switched to ${newTheme} mode`, 'info');
     }
 
@@ -2449,11 +2310,6 @@
       }
     }
 
-    /**
-     * ========================================================================
-     * TOAST NOTIFICATIONS
-     * ========================================================================
-     */
     function showToast(message, type = 'info') {
       const container = document.getElementById('toastContainer');
       if (!container) return;
@@ -2487,14 +2343,267 @@
       }, 3200);
     }
 
-    /**
-     * Utility: Escape HTML to prevent XSS
-     */
     function escapeHtml(str) {
       if (!str) return '';
       const div = document.createElement('div');
       div.textContent = str;
       return div.innerHTML;
+    }
+
+    // Attach all functions explicitly to window for global access
+    window.addTask = addTask;
+    window.completeTask = completeTask;
+    window.deleteTask = deleteTask;
+    window.editTask = editTask;
+    window.saveEdit = saveEdit;
+    window.cancelEdit = cancelEdit;
+    window.filterTasks = filterTasks;
+    window.searchTasks = searchTasks;
+    window.clearSearch = clearSearch;
+    window.sortTasks = sortTasks;
+    window.loadSampleTasks = loadSampleTasks;
+    window.confirmClearCompleted = confirmClearCompleted;
+    window.clearCompleted = clearCompleted;
+    window.confirmDeleteAll = confirmDeleteAll;
+    window.deleteAllTasks = deleteAllTasks;
+    window.toggleTheme = toggleTheme;
+    window.closeConfirmModal = closeConfirmModal;
+
+    /**
+     * ========================================================================
+     * EVENT LISTENERS INITIALIZATION (Direct & Delegated)
+     * ========================================================================
+     */
+    function attachEventListeners() {
+      // 1. Theme toggle
+      const themeBtn = document.getElementById('themeToggleBtn');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleTheme();
+        });
+      }
+
+      // 2. Add task form & button
+      const addForm = document.getElementById('addTaskForm');
+      if (addForm) {
+        addForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          addTask();
+        });
+      }
+
+      const addBtn = document.getElementById('addTaskBtn');
+      if (addBtn) {
+        addBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          addTask();
+        });
+      }
+
+      // 3. Search and sort
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchTasks(e.target.value);
+        });
+      }
+
+      const searchClearBtn = document.getElementById('searchClearBtn');
+      if (searchClearBtn) {
+        searchClearBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          clearSearch();
+        });
+      }
+
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+          sortTasks(e.target.value);
+        });
+      }
+
+      // 4. Filter tabs (delegated click listener)
+      const filterTabs = document.getElementById('filterTabs');
+      if (filterTabs) {
+        filterTabs.addEventListener('click', (e) => {
+          const btn = e.target.closest('.filter-btn');
+          if (btn && btn.dataset.filter) {
+            e.preventDefault();
+            filterTasks(btn.dataset.filter);
+          }
+        });
+      }
+
+      // 5. Footer action buttons
+      const btnResetDemo = document.getElementById('btnResetDemo');
+      if (btnResetDemo) {
+        btnResetDemo.addEventListener('click', (e) => {
+          e.preventDefault();
+          loadSampleTasks(true);
+        });
+      }
+
+      const btnClearCompleted = document.getElementById('btnClearCompleted');
+      if (btnClearCompleted) {
+        btnClearCompleted.addEventListener('click', (e) => {
+          e.preventDefault();
+          confirmClearCompleted();
+        });
+      }
+
+      const btnDeleteAll = document.getElementById('btnDeleteAll');
+      if (btnDeleteAll) {
+        btnDeleteAll.addEventListener('click', (e) => {
+          e.preventDefault();
+          confirmDeleteAll();
+        });
+      }
+
+      // 6. Confirmation modal buttons & backdrop
+      const modal = document.getElementById('confirmModal');
+      const modalCancel = document.getElementById('modalCancelBtn');
+      const modalConfirm = document.getElementById('modalConfirmBtn');
+
+      if (modalCancel) {
+        modalCancel.addEventListener('click', (e) => {
+          e.preventDefault();
+          closeConfirmModal();
+        });
+      }
+
+      if (modalConfirm) {
+        modalConfirm.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (typeof pendingModalAction === 'function') {
+            pendingModalAction();
+          }
+          closeConfirmModal();
+        });
+      }
+
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            closeConfirmModal();
+          }
+        });
+      }
+
+      // 7. Global Keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeConfirmModal();
+          if (editingTaskId) cancelEdit();
+        }
+      });
+
+      // 8. Task list event delegation (handles checkboxes, edit triggers, delete triggers, edit saving, empty actions)
+      const taskList = document.getElementById('taskList');
+      if (taskList) {
+        taskList.addEventListener('click', (e) => {
+          // Checkbox toggle
+          const checkbox = e.target.closest('.btn-toggle-complete');
+          if (checkbox) {
+            e.preventDefault();
+            const id = checkbox.dataset.id || checkbox.closest('.task-card')?.dataset.taskId;
+            if (id) completeTask(id);
+            return;
+          }
+
+          // Edit button trigger
+          const editBtn = e.target.closest('.btn-edit-trigger');
+          if (editBtn) {
+            e.preventDefault();
+            const id = editBtn.dataset.id || editBtn.closest('.task-card')?.dataset.taskId;
+            if (id) editTask(id);
+            return;
+          }
+
+          // Delete button trigger
+          const deleteBtn = e.target.closest('.btn-delete-trigger');
+          if (deleteBtn) {
+            e.preventDefault();
+            const id = deleteBtn.dataset.id || deleteBtn.closest('.task-card')?.dataset.taskId;
+            if (id) deleteTask(id);
+            return;
+          }
+
+          // Save edit button inside edit panel
+          const saveBtn = e.target.closest('.btn-edit-save');
+          if (saveBtn) {
+            e.preventDefault();
+            const id = saveBtn.dataset.id || saveBtn.closest('.task-card')?.dataset.taskId;
+            if (id) saveEdit(id);
+            return;
+          }
+
+          // Cancel edit button inside edit panel
+          const cancelBtn = e.target.closest('.btn-edit-cancel');
+          if (cancelBtn) {
+            e.preventDefault();
+            cancelEdit();
+            return;
+          }
+
+          // Empty state actions
+          const viewAllBtn = e.target.closest('.btn-view-all');
+          if (viewAllBtn) {
+            e.preventDefault();
+            filterTasks('all');
+            clearSearch();
+            return;
+          }
+
+          const loadDemoBtn = e.target.closest('.btn-load-demo');
+          if (loadDemoBtn) {
+            e.preventDefault();
+            loadSampleTasks(true);
+            return;
+          }
+
+          const clearSearchBtn = e.target.closest('.btn-clear-search');
+          if (clearSearchBtn) {
+            e.preventDefault();
+            clearSearch();
+            return;
+          }
+        });
+
+        // Keydown listener for inline edit input (Enter to save, Escape to cancel)
+        taskList.addEventListener('keydown', (e) => {
+          if (e.target && e.target.classList.contains('task-edit-input')) {
+            const card = e.target.closest('.task-card');
+            const id = card ? card.dataset.taskId : null;
+            if (!id) return;
+
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              saveEdit(id);
+            } else if (e.key === 'Escape') {
+              e.preventDefault();
+              cancelEdit();
+            }
+          }
+        });
+      }
+    }
+
+    // Startup initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      initCurrentDate();
+      initTheme();
+      loadTasks();
+      attachEventListeners();
+    });
+
+    // In case DOM is already loaded
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+      initCurrentDate();
+      initTheme();
+      loadTasks();
+      attachEventListeners();
     }
   </script>
 </body>
